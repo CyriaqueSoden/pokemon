@@ -67,17 +67,17 @@ def combat():
     print("quel pokemon utiliser ?")
     for i in range(len(inventaire[1])):
         print(inventaire[1][i][0], i)
-    nb_pokemon_used = str(input())
-    if nb_pokemon_used == "q":
+    id_pokemon_used = str(input())
+    if id_pokemon_used == "q":
         return menu()
     if not inventaire[1]:
         print("pas de pokemon")
         return 0
-    if not inventaire[1][int(nb_pokemon_used)]:
+    if not inventaire[1][int(id_pokemon_used)]:
         print("pokemon non existant")
         return combat()
 
-    if random.randint(0, int(inventaire[1][int(nb_pokemon_used)][3]/inventaire[1][int(nb_pokemon_used)][4])) == random.randint(0, int(rando_pokemon[3]/rando_pokemon[4])):
+    if random.randint(0, int(inventaire[1][int(id_pokemon_used)][3]/inventaire[1][int(id_pokemon_used)][4])) == random.randint(0, int(rando_pokemon[3]/rando_pokemon[4])):
         argent_gagne = random.randint(1, 2000)
         print("combat gagné , vous remporter ", argent_gagne, "$")
         inventaire[2][0] += argent_gagne
