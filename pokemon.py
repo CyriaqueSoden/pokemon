@@ -45,8 +45,17 @@ inventaire = [[["pokeball", 0], ["superball", 0],
 
 
 def capture():
+    print("quelle pokeball utiliser ?")
+    for i in range(len(inventaire[0])):
+        print(inventaire[0][i] ,"(",i,")")
+    quelle_pokeball = input(str())
+    inventaire[0][int(quelle_pokeball)][1] -= 1
+    if quelle_pokeball == "3" :
+        print("the ", rando_pokemon[0], " in the pocket")
+        inventaire[1].append(rando_pokemon)
+        return 0
     pc_capture = random.randint(1, 100)
-    if pokeballs[0][1] <= pc_capture:
+    if pokeballs[int(quelle_pokeball)][1] <= pc_capture:
         pc_capture = random.randint(1, 100)
         if rando_pokemon[2] <= pc_capture:
             print("the ", rando_pokemon[0], " in the pocket")
