@@ -80,9 +80,40 @@ def shop() :
             inventaire[0][j][1] += 1
             print("vous avez acheté : 1" ,pokeballs[j][0] ,"(" ,pokeballs[j][2] ,"$)")
 
-shop()
+
+def menu() :
+    print( " shop (1) \n spawn (2) \n inventaire objets (3) \n inventaire pokemon(4)")
+    choix_menu = input(str())
+
+    if choix_menu == "1" :
+        shop()
+
+    if choix_menu == "2" :
+        print("combat (1) ou capture (2) ?")
+        choix_combat = input(str())
+        if choix_combat == "1" :
+            combat()
+        if choix_combat == "2" :
+            capture()
+    if choix_menu == "3" :
+        for i in range(len(inventaire[0])):
+            print(inventaire[0][i])
+        
+
+    if choix_menu == "4" :
+        if not inventaire[1] :
+            print("pas de pokemon")
+            return 0
+        for i in range(len(inventaire[0])):
+            print(inventaire[1])
 
 
+
+
+
+
+
+menu()
 
 
 
