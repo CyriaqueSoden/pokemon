@@ -49,6 +49,9 @@ def capture():
     for i in range(len(inventaire[0])):
         print(inventaire[0][i] ,"(",i,")")
     quelle_pokeball = input(str())
+    if inventaire[0][int(quelle_pokeball)][1] == 0 :
+        print("pas de ",inventaire[0][int(quelle_pokeball)][0])
+        return 0
     inventaire[0][int(quelle_pokeball)][1] -= 1
     if quelle_pokeball == "3" :
         print("the ", rando_pokemon[0], " in the pocket")
