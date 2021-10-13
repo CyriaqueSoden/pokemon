@@ -151,7 +151,7 @@ def menu() :
 
 def go_menu() : 
     blbl = input(str())
-    if blbl == "q" :
+    if blbl == "q" or not blbl :
         menu()
 
 
