@@ -1,6 +1,5 @@
 import random
 
-
 liste = [["pika", 50, 10, 10, 10], ["pskycokouak", 1, 50, 70, 5],
          ["drakofeu", 50, 10, 5, 20], ["electron", 20, 25, 30, 15]]
 
@@ -75,6 +74,30 @@ capture()
 for i in range(100):
     inventaire[2][0] += combat()
 print(inventaire)
-print("hello")
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 #            comment calculer le % de chance de spawn
 #            % /(100/nb_total_de_%)
