@@ -31,26 +31,6 @@ def new_pokemon():
             nb_liste = random.randint(1, len(liste)) - 1
 
 
-# calcule des % de spawn des pokemons
-
-
-# count = [0]len(liste)
-
-# for i in range(10000):
-#    poke = new_pokemon()
-#    for j in range(len(liste)) :
-#        if liste[j][0] == poke :
-#            count[j] += 1
-
-#total = 0
-
-# for i in range(len(liste)) :
-#    total += liste[i][1]
-
-# for i in range(len(count)) :
-#            print( count[i]//100,  "%    " , int((liste[i][1])(100/total)) , "%")
-
-
 def capture():
     print(rando_pokemon)
     print("quelle pokeball utiliser ?")
@@ -86,17 +66,17 @@ def capture():
 def combat():
     print("quel pokemon utiliser ?")
     for i in range(len(inventaire[1])):
-        print(inventaire[1][i][0] , i)
+        print(inventaire[1][i][0], i)
     nb_pokemon_used = str(input())
-    if nb_pokemon_used == "q" :
+    if nb_pokemon_used == "q":
         return menu()
     if not inventaire[1]:
         print("pas de pokemon")
         return 0
-    if not inventaire[1][int(nb_pokemon_used)] :
+    if not inventaire[1][int(nb_pokemon_used)]:
         print("pokemon non existant")
         return combat()
-    
+
     if random.randint(0, int(inventaire[1][int(nb_pokemon_used)][3]/inventaire[1][int(nb_pokemon_used)][4])) == random.randint(0, int(rando_pokemon[3]/rando_pokemon[4])):
         argent_gagne = random.randint(1, 2000)
         print("combat gagné , vous remporter ", argent_gagne, "$")
