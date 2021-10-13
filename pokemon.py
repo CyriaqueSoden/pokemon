@@ -17,6 +17,7 @@ def new_pokemon():
 
 rando_pokemon = new_pokemon()
 
+
 # calcule des % de spawn des pokemons
 
 
@@ -51,7 +52,9 @@ def capture():
     quelle_pokeball = input(str())
     if inventaire[0][int(quelle_pokeball)][1] == 0 :
         print("pas de ",inventaire[0][int(quelle_pokeball)][0])
-        return 0
+        return capture()
+    if quelle_pokeball == "q" :
+        return menu()
     inventaire[0][int(quelle_pokeball)][1] -= 1
     if quelle_pokeball == "3" :
         print("the ", rando_pokemon[0], " in the pocket")
@@ -86,6 +89,8 @@ def shop() :
         print(inventaire[0][i] , pokeballs[i][2], "$")
     print("Que voulez vous acheter ? solde :", inventaire[2] ,"$")
     type = input(str())
+    if type == "q" :
+        return menu()
     for j in range(len(inventaire[0])):
         if type == (inventaire[0][j][0]) :
             inventaire[2][0] -= pokeballs[j][2]
@@ -94,15 +99,18 @@ def shop() :
 
 
 def menu() :
-    print( " shop (1) \n spawn (2) \n inventaire objets (3) \n inventaire pokemon(4)")
+    print( " shop (1) \n spawn (2) \n inventaire objets (3) \n inventaire pokemon(4) \n q pour quitter n'importe quelle question")
     choix_menu = input(str())
 
     if choix_menu == "1" :
         shop()
 
     if choix_menu == "2" :
+        rando_pokemon = new_pokemon()
         print("combat (1) ou capture (2) ?")
         choix_combat = input(str())
+        if choix_combat == "q" :
+            return menu()
         if choix_combat == "1" :
             combat()
         if choix_combat == "2" :
@@ -116,7 +124,7 @@ def menu() :
         if not inventaire[1] :
             print("pas de pokemon")
             return 0
-        for i in range(len(inventaire[0])):
+        for i in range(len(inventaire[1])):
             print(inventaire[1])
 
 
@@ -124,7 +132,7 @@ def menu() :
 
 
 
-
+inventaire[1].append(rando_pokemon)
 menu()
 
 
