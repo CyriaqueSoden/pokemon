@@ -42,7 +42,7 @@ pokeballs = [["pokeball", 30,200], ["superball", 50,600],
              ["hyperball", 70,1200], ["masterball", 100,50000]]
 
 inventaire = [[["pokeball", 0], ["superball", 0],
-               ["hyperball", 0], ["masterball", 0]], [], [0]]
+               ["hyperball", 0], ["masterball", 0]], [], [100000000000000]]
 
 
 def capture():
@@ -50,11 +50,11 @@ def capture():
     for i in range(len(inventaire[0])):
         print(inventaire[0][i] ,"(",i,")")
     quelle_pokeball = input(str())
+    if quelle_pokeball == "q" :
+        return menu()
     if inventaire[0][int(quelle_pokeball)][1] == 0 :
         print("pas de ",inventaire[0][int(quelle_pokeball)][0])
         return capture()
-    if quelle_pokeball == "q" :
-        return menu()
     inventaire[0][int(quelle_pokeball)][1] -= 1
     if quelle_pokeball == "3" :
         print("the ", rando_pokemon[0], " in the pocket")
@@ -79,10 +79,10 @@ def combat():
     if random.randint(0, int(inventaire[1][0][3]/inventaire[1][0][4])) == random.randint(0, int(rando_pokemon[3]/rando_pokemon[4])):
         argent_gagne = random.randint(1, 2000)
         print("combat gagné , vous remporter ", argent_gagne, "$")
-        return argent_gagne
+        return argent_gagne , menu()
     else:
         print("combat perdu")
-        return 0
+        return menu()
 
 def shop() :
     for i in range(len(inventaire[0])):
@@ -96,6 +96,7 @@ def shop() :
             inventaire[2][0] -= pokeballs[j][2]
             inventaire[0][j][1] += 1
             print("vous avez acheté : 1" ,pokeballs[j][0] ,"(" ,pokeballs[j][2] ,"$)")
+    return shop()
 
 
 def menu() :
@@ -107,6 +108,7 @@ def menu() :
 
     if choix_menu == "2" :
         rando_pokemon = new_pokemon()
+        print(rando_pokemon)
         print("combat (1) ou capture (2) ?")
         choix_combat = input(str())
         if choix_combat == "q" :
@@ -115,10 +117,12 @@ def menu() :
             combat()
         if choix_combat == "2" :
             capture()
+
     if choix_menu == "3" :
         for i in range(len(inventaire[0])):
             print(inventaire[0][i])
-        
+        print(inventaire[2][0], "$")
+        return go_menu()
 
     if choix_menu == "4" :
         if not inventaire[1] :
@@ -126,7 +130,13 @@ def menu() :
             return 0
         for i in range(len(inventaire[1])):
             print(inventaire[1])
+        return go_menu()
 
+
+def go_menu() : 
+    blbl = input(str())
+    if blbl == "q" :
+        menu()
 
 
 
