@@ -1,5 +1,13 @@
 import random
 
+from os import system, name
+from time import sleep
+  
+def clear():
+  
+    if name == 'nt':
+        _ = system('cls')
+
 liste = [["pika", 50, 10, 10, 10], ["pskycokouak", 1, 50, 70, 5],
          ["drakofeu", 50, 10, 5, 20], ["electron", 20, 25, 30, 15]]
 
@@ -79,10 +87,11 @@ def combat():
     if random.randint(0, int(inventaire[1][0][3]/inventaire[1][0][4])) == random.randint(0, int(rando_pokemon[3]/rando_pokemon[4])):
         argent_gagne = random.randint(1, 2000)
         print("combat gagné , vous remporter ", argent_gagne, "$")
-        return argent_gagne , menu()
+        inventaire[2][0] += argent_gagne
+        return go_menu()
     else:
         print("combat perdu")
-        return menu()
+        return go_menu()
 
 def shop() :
     for i in range(len(inventaire[0])):
@@ -95,18 +104,22 @@ def shop() :
         if type == (inventaire[0][j][0]) :
             inventaire[2][0] -= pokeballs[j][2]
             inventaire[0][j][1] += 1
+            clear()
             print("vous avez acheté : 1" ,pokeballs[j][0] ,"(" ,pokeballs[j][2] ,"$)")
     return shop()
 
 
 def menu() :
+    clear()
     print( " shop (1) \n spawn (2) \n inventaire objets (3) \n inventaire pokemon(4) \n q pour quitter n'importe quelle question")
     choix_menu = input(str())
 
     if choix_menu == "1" :
+        clear()
         shop()
 
     if choix_menu == "2" :
+        clear()
         rando_pokemon = new_pokemon()
         print(rando_pokemon)
         print("combat (1) ou capture (2) ?")
@@ -114,8 +127,10 @@ def menu() :
         if choix_combat == "q" :
             return menu()
         if choix_combat == "1" :
+            clear()
             combat()
         if choix_combat == "2" :
+            clear()
             capture()
 
     if choix_menu == "3" :
@@ -125,6 +140,7 @@ def menu() :
         return go_menu()
 
     if choix_menu == "4" :
+        clear()
         if not inventaire[1] :
             print("pas de pokemon")
             return 0
