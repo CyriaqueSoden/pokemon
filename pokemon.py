@@ -37,8 +37,8 @@ rando_pokemon = new_pokemon()
 #            print( count[i]//100,  "%    " , int((liste[i][1])(100/total)) , "%")
 
 
-pokeballs = [["pokeball", 30], ["superball", 50],
-             ["hyperball", 70], ["masterball", 100]]
+pokeballs = [["pokeball", 30,200], ["superball", 50,600],
+             ["hyperball", 70,1200], ["masterball", 100,50000]]
 
 inventaire = [[["pokeball", 0], ["superball", 0],
                ["hyperball", 0], ["masterball", 0]], [], [0]]
@@ -69,13 +69,18 @@ def combat():
         print("combat perdu")
         return 0
 
+def shop() :
+    for i in range(len(inventaire[0])):
+        print(inventaire[0][i] , pokeballs[i][2], "$")
+    print("Que voulez vous acheter ? solde :", inventaire[2] ,"$")
+    type = input(str())
+    for j in range(len(inventaire[0])):
+        if type == (inventaire[0][j][0]) :
+            inventaire[2][0] -= pokeballs[j][2]
+            inventaire[0][j][1] += 1
+            print("vous avez acheté : 1" ,pokeballs[j][0] ,"(" ,pokeballs[j][2] ,"$)")
 
-capture()
-for i in range(100):
-    inventaire[2][0] += combat()
-print(inventaire)
-
-
+shop()
 
 
 
