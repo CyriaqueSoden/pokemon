@@ -111,6 +111,20 @@ def shop():
 
 def menu():
     clear()
+    print("""\
+                                          
+    _.----.        ____         ,'  _\   ___    ___     ____
+_,-'       `.     |    |  /`.   \,-'    |   \  /   |   |    \  |`.
+\      __    \    '-.  | /   `.  ___    |    \/    |   '-.   \ |  |
+ \.    \ \   |  __  |  |/    ,','_  `.  |          | __  |    \|  |
+   \    \/   /,' _`.|      ,' / / / /   |          ,' _`.|     |  |
+    \     ,-'/  /   \    ,'   | \/ / ,`.|         /  /   \  |     |
+     \    \ |   \_/  |   `-.  \    `'  /|  |    ||   \_/  | |\    |
+      \    \ \      /       `-.`.___,-' |  |\  /| \      /  | |   |
+       \    \ `.__,'|  |`-._    `|      |__| \/ |  `.__,'|  | |   |
+        \_.-'       |__|    `-._ |              '-.|     '-.| |   |
+                                `'                            '-._|""")
+
     print(" shop (1) \n spawn (2) \n inventaire objets (3) \n inventaire pokemon(4) \n q pour quitter n'importe quelle question")
     choix_menu = input(str())
 
@@ -155,6 +169,7 @@ def go_menu():
         menu()
 
 
+clear()
 rando_pokemon = new_pokemon()
 inventaire[1].append(new_pokemon())
 menu()
