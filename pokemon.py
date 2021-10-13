@@ -7,7 +7,7 @@ from time import sleep
 liste = [["pika", 50, 10, 10, 10], ["pskycokouak", 1, 50, 70, 5],
          ["drakofeu", 50, 10, 5, 20], ["electron", 20, 25, 30, 15]]
 
-pokeballs = [["pokeball", 30, 200], ["superball", 50, 600],
+POKEBALLS = [["pokeball", 30, 200], ["superball", 50, 600],
              ["hyperball", 70, 1200], ["masterball", 100, 50000]]
 
 inventaire = [[["pokeball", 0], ["superball", 0],
@@ -52,6 +52,7 @@ def new_pokemon():
 
 
 def capture():
+    print(rando_pokemon)
     print("quelle pokeball utiliser ?")
     for i in range(len(inventaire[0])):
         print(inventaire[0][i], "(", i, ")")
@@ -59,30 +60,44 @@ def capture():
     if quelle_pokeball == "q":
         return menu()
     if inventaire[0][int(quelle_pokeball)][1] == 0:
+        clear()
         print("pas de ", inventaire[0][int(quelle_pokeball)][0])
         return capture()
     inventaire[0][int(quelle_pokeball)][1] -= 1
     if quelle_pokeball == "3":
-        print("the ", rando_pokemon[0], " in the pocket")
+        print("réussi ", rando_pokemon[0], " est dans l'inventaire")
         inventaire[1].append(rando_pokemon)
-        return 0
+        return go_menu()
     pc_capture = random.randint(1, 100)
-    if pokeballs[int(quelle_pokeball)][1] <= pc_capture:
+    if POKEBALLS[int(quelle_pokeball)][1] <= pc_capture:
         pc_capture = random.randint(1, 100)
         if rando_pokemon[2] <= pc_capture:
-            print("the ", rando_pokemon[0], " in the pocket")
+            print("réussi ", rando_pokemon[0], " est dans l'inventaire")
             inventaire[1].append(rando_pokemon)
+            return go_menu()
         else:
-            print("bonobo gameplay ,", rando_pokemon[0], "est parti")
+            print("raté ,", rando_pokemon[0], "est parti")
+            return go_menu()
     else:
-        print("bonobo gameplay ,", rando_pokemon[0], "est partie")
+        print("raté ,", rando_pokemon[0], "est partie")
+        return go_menu()
 
 
 def combat():
+    print("quel pokemon utiliser ?")
+    for i in range(len(inventaire[1])):
+        print(inventaire[1][i][0] , i)
+    nb_pokemon_used = str(input())
+    if nb_pokemon_used == "q" :
+        return menu()
     if not inventaire[1]:
         print("pas de pokemon")
         return 0
-    if random.randint(0, int(inventaire[1][0][3]/inventaire[1][0][4])) == random.randint(0, int(rando_pokemon[3]/rando_pokemon[4])):
+    if not inventaire[1][int(nb_pokemon_used)] :
+        print("pokemon non existant")
+        return combat()
+    
+    if random.randint(0, int(inventaire[1][int(nb_pokemon_used)][3]/inventaire[1][int(nb_pokemon_used)][4])) == random.randint(0, int(rando_pokemon[3]/rando_pokemon[4])):
         argent_gagne = random.randint(1, 2000)
         print("combat gagné , vous remporter ", argent_gagne, "$")
         inventaire[2][0] += argent_gagne
@@ -94,18 +109,18 @@ def combat():
 
 def shop():
     for i in range(len(inventaire[0])):
-        print(inventaire[0][i], pokeballs[i][2], "$")
+        print(inventaire[0][i], POKEBALLS[i][2], "$")
     print("Que voulez vous acheter ? solde :", inventaire[2], "$")
     type = input(str())
     if type == "q":
         return menu()
     for j in range(len(inventaire[0])):
         if type == (inventaire[0][j][0]):
-            inventaire[2][0] -= pokeballs[j][2]
+            inventaire[2][0] -= POKEBALLS[j][2]
             inventaire[0][j][1] += 1
             clear()
             print("vous avez acheté : 1",
-                  pokeballs[j][0], "(", pokeballs[j][2], "$)")
+                  POKEBALLS[j][0], "(", POKEBALLS[j][2], "$)")
     return shop()
 
 
@@ -172,6 +187,10 @@ def go_menu():
 clear()
 rando_pokemon = new_pokemon()
 inventaire[1].append(new_pokemon())
+inventaire[1].append(new_pokemon())
+inventaire[1].append(new_pokemon())
+inventaire[1].append(new_pokemon())
+
 menu()
 
 
