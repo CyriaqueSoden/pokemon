@@ -16,7 +16,7 @@ POKEBALLS = [["pokeball", 30, 200], ["superball", 50, 600],
              ["hyperball", 70, 1200], ["masterball", 100, 50000]]
 
 inventory = [[["pokeball", 0], ["superball", 0],
-              ["hyperball", 0], ["masterball", 0]], [], [0]]
+              ["hyperball", 0], ["masterball", 0]], [   ], [0]]
 
 # endregion
 
@@ -161,8 +161,8 @@ _,-'       `.     |    |  /`.   \,-'    |   \  /   |   |    \  |`.
         if not inventory[1]:
             print("pas de pokemon")
             return 0
-        for i in range(len(inventory[1])):
-            print(inventory[1])
+        for i in(inventory[1]):
+            print(i)
         return go_menu()
 
 
@@ -185,7 +185,7 @@ menu()
 
 # endregion
 
-#region percentage_finder
+# region percentage_finder
 #            comment calculer le % de chance de spawn
 #            A /(100/B + A)
 #
@@ -202,4 +202,3 @@ def percentage_finder() :
     print("le vrai nombre a utiliser est " ,result)
 
 #endregion
-
