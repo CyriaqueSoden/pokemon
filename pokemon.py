@@ -1,7 +1,7 @@
 # region import
 
 import random
-# import pour clear()
+# import for clear()
 from os import system, name
 from time import sleep
 
@@ -16,19 +16,19 @@ POKEBALLS = [["pokeball", 30, 200], ["superball", 50, 600],
              ["hyperball", 70, 1200], ["masterball", 100, 50000]]
 
 inventory = [[["pokeball", 0], ["superball", 0],
-              ["hyperball", 0], ["masterball", 0]], [], [100000000000000]]
+              ["hyperball", 0], ["masterball", 0]], [], [0]]
 
 # endregion
 
 # region def fonction
 
-
+#reset the cmd so its clean
 def clear():
 
     if name == 'nt':
         _ = system('cls')
 
-
+#generate a random pokemon using liste
 def new_pokemon():
     percentage = random.randint(1, 100)
     start_in_liste = random.randint(1, len(liste)) - 1
@@ -39,8 +39,8 @@ def new_pokemon():
             percentage = random.randint(1, 100)
             start_in_liste = random.randint(1, len(liste)) - 1
 
-
-def capture():
+#try to catch a random pokemon created in menu() -> 2 using the pokeball the user choose 
+def catch():
     print(random_pokemon)
     print("quelle pokeball utiliser ?")
     for i in range(len(inventory[0])):
@@ -51,7 +51,7 @@ def capture():
     if inventory[0][int(pokeball_used)][1] == 0:
         clear()
         print("pas de ", inventory[0][int(pokeball_used)][0])
-        return capture()
+        return catch()
     inventory[0][int(pokeball_used)][1] -= 1
     if pokeball_used == "3":
         print("réussi ", random_pokemon[0], " est dans l'inventory")
@@ -71,7 +71,7 @@ def capture():
         print("raté ,", random_pokemon[0], "est partie")
         return go_menu()
 
-
+#fight a random pokemon created in menu() -> 2 using the pokemon the user choose and give you money if you win
 def combat():
     print("quel pokemon utiliser ?")
     for i in range(len(inventory[1])):
@@ -95,7 +95,7 @@ def combat():
         print("combat perdu")
         return go_menu()
 
-
+#allow the user to buy pokeballs if he has enough money
 def shop():
     for i in range(len(inventory[0])):
         print(inventory[0][i], POKEBALLS[i][2], "$")
@@ -112,7 +112,7 @@ def shop():
                   POKEBALLS[j][0], "(", POKEBALLS[j][2], "$)")
     return shop()
 
-
+#the start menu
 def menu():
     clear()
     print("""\                                         
@@ -139,7 +139,7 @@ _,-'       `.     |    |  /`.   \,-'    |   \  /   |   |    \  |`.
         clear()
         random_pokemon = new_pokemon()
         print(random_pokemon)
-        print("combat (1) ou capture (2) ?")
+        print("combat (1) ou catch (2) ?")
         combat_choice = input(str())
         if combat_choice == "q":
             return menu()
@@ -148,7 +148,7 @@ _,-'       `.     |    |  /`.   \,-'    |   \  /   |   |    \  |`.
             combat()
         if combat_choice == "2":
             clear()
-            capture()
+            catch()
 
     if menu_choice == "3":
         for i in range(len(inventory[0])):
@@ -173,7 +173,6 @@ def go_menu():
 
 # endregion
 
-
 # region code starter
 clear()
 random_pokemon = new_pokemon()
@@ -186,5 +185,21 @@ menu()
 
 # endregion
 
+#region percentage_finder
 #            comment calculer le % de chance de spawn
-#            % /(100/nb_total_de_%)
+#            A /(100/B + A)
+#
+#            A = % de spawn voulu pour le pokemon
+#            B = somme de tous les % de spawn des pokemons deja existant
+#            
+def percentage_finder() :
+    print("Quel chance de spawn voulez vous ?")
+    a = int(input())
+    b = 0
+    for i in range(len(liste)) :
+        b += liste[i][1]
+    result = a /(100/(b + a))
+    print("le vrai nombre a utiliser est " ,result)
+
+#endregion
+
